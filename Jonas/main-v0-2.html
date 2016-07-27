@@ -3,6 +3,8 @@
 <html>
 <head>
 	<title> Jonas test HTML </title>
+	<!-- jQuery api-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </head>
 <body>
 		<canvas id="jonasCanvas" width="800" height="640" style="border:1px solid #d3d3d3;">
@@ -11,15 +13,32 @@
 </body>
 
 <script type="text/javascript">
-	/* 	Gets the inner width and height from the window object.
-		Docs @ http://www.w3schools.com/jsref/prop_win_innerheight.asp */
-	var width = window.innerWidth;
-	var height = window.innerHeight;
 
-	/* Init canvas-object */
-	var c = document.getElementById("jonasCanvas");
-	var ctx = c.getContext("2d");
-	
+	function main(){
+		/* 	Gets the inner width and height from the window object.
+			Docs @ http://www.w3schools.com/jsref/prop_win_innerheight.asp */
+		var max_width = window.innerWidth;
+		var max_height = window.innerHeight;
+		console.log('Width: ' + max_width + ' Height: ' + max_height )
+
+		/* Init Canvas-object */
+		var c = document.getElementById("jonasCanvas");
+		var ctx = c.getContext("2d");
+
+		/* Create game-loop with an update and a draw function
+		    with desired FPS*/
+		    
+		function update(){ ... };
+		function draw(){ ... };
+
+		var FPS = 30
+		setInterval(function(){
+			update();
+			draw();
+		}, 1000/FPS);
+	}
+
+	main()
 
 </script>
 
