@@ -41,6 +41,9 @@ $(document).ready(function(){
 		var c = document.getElementById("jonasCanvas");  // javascript canvas object
 		var ctx = c.getContext("2d");                    // draw object
 
+		$c.attr('width', CANVAS_width);
+		$c.attr('height', CANVAS_height);
+
 		// Draw objects
 		var arc1 = {                       // arc can create circles
 			     x : 300,
@@ -54,12 +57,12 @@ $(document).ready(function(){
 		       }
 		};
 
+		// Functions
 		function transformArc(arc, xdelt, ydelt){
 			arc.x += xdelt * arc.speed;
 			arc.y += ydelt * arc.speed;
 		};
-
-		// Functions
+		
 		function update(){
 
 			if (currentKey == 37){        
@@ -92,9 +95,6 @@ $(document).ready(function(){
 			currentKey = e.which;
 		}); 
 
-
-		$c.attr('width', CANVAS_width);
-		$c.attr('height', CANVAS_height);
 		
 		// Game engine loop
 		setInterval(function(){
