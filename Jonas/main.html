@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title> Jonas test HTML </title>
+	<!-- jQuery api-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</head>
+<body>
+		<canvas id="jonasCanvas" style="border:1px solid #d3d3d3;">
+		Your browser does not support the HTML5 canvas tag.</canvas>
+
+</body>
+
+<script type="text/javascript">
+
+
+$(document).ready(function(){
+	
+	/* Innholdsliste main:
+	     1. Constants
+	     2. Variables 
+	     3. Screen objects
+	     4. Game objects
+	     5. Functions 
+	     6. Event handlers
+	     7. Game engine*/
+
+	function main(){
+		// Constants
+		// 	Get the inner width and height from the window object. Docs @ http://www.w3schools.com/jsref/prop_win_innerheight.asp
+		var CANVAS_width = window.innerWidth - (window.innerWidth/10); 		
+		var CANVAS_height = window.innerHeight - (window.innerHeight/10);
+		var FPS = 30;
+
+		// Variables
+		var currentKey;
+
+		// Canvas objects
+		var $c = $('#jonasCanvas');                      // jQuery canvas object
+		var c = document.getElementById("jonasCanvas");  // javascript canvas object
+		var ctx = c.getContext("2d");                    // draw object
+
+		// Draw objects
+		var arc1 = {                       // arc can create circles
+			     x : 300,
+			     y : 300,
+		       rad : 50,
+		       start : 0,
+		       end : 2 * Math.PI,
+		       speed : 1,
+		       draw : function() {
+		       		ctx.arc(arc1.x, arc1.y, arc1.rad, arc1.start, arc1.end);
+		       }
+		};
+
+		function transformArc(arc, xdelt, ydelt){
+			arc.x += xdelt * arc.speed;
+			arc.y += ydelt * arc.speed;
+		};
+
+		// Functions
+		function update(){
+
+			if (currentKey == 37){        
+				transformArc(arc1, -1, 0)	// left
+			} else if (currentKey == 38) {                  
+				transformArc(arc1, 0, -1)	// up
+			} else if (currentKey == 39) {                
+				transformArc(arc1, 1, 0)	// right
+			} else if (currentKey == 40) {
+				transformArc(arc1, 0, 1)	// down
+			} else if (currentKey == 32){   
+				arc1.speed += .1;			// space
+			};
+		};
+
+		function draw(){
+			/*  The draw function is more static than the update funciton.
+				 Nothing should change here, and the variables that are used in the draw
+				  funciton should only be modified somewhere else. */
+
+			ctx.clearRect(0,0,CANVAS_width, CANVAS_height)   // Clear entire canvas before every loop.
+			ctx.beginPath();
+			arc1.draw();
+			ctx.stroke();
+		};
+
+		// Events
+		$(document).keydown(function(e){
+			console.log(e.which);
+			currentKey = e.which;
+		}); 
+
+
+		$c.attr('width', CANVAS_width);
+		$c.attr('height', CANVAS_height);
+		
+		// Game engine loop
+		setInterval(function(){
+			update();
+			draw();
+		}, 1000/FPS);
+	};
+
+	main()
+
+});
+		
+
+</script>
+
+</html>
