@@ -7,38 +7,69 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </head>
 <body>
-		<canvas id="jonasCanvas" width="800" height="640" style="border:1px solid #d3d3d3;">
+		<canvas id="jonasCanvas" style="border:1px solid #d3d3d3;">
 		Your browser does not support the HTML5 canvas tag.</canvas>
 
 </body>
 
 <script type="text/javascript">
 
+
+$(document).ready(function(){
+	
 	function main(){
-		/* 	Gets the inner width and height from the window object.
-			Docs @ http://www.w3schools.com/jsref/prop_win_innerheight.asp */
-		var max_width = window.innerWidth;
-		var max_height = window.innerHeight;
-		console.log('Width: ' + max_width + ' Height: ' + max_height )
+		// Constants
+		// 	Get the inner width and height from the window object. Docs @ http://www.w3schools.com/jsref/prop_win_innerheight.asp
+		var CANVAS_width = window.innerWidth - (window.innerWidth/10); 		
+		var CANVAS_height = window.innerHeight - (window.innerHeight/10);
+		var FPS = 30;
 
-		/* Init Canvas-object */
-		var c = document.getElementById("jonasCanvas");
-		var ctx = c.getContext("2d");
+		// Draw objects
+		var arc1 = {                       // arc can create circles
+			     'x' : 300,
+			     'y' : 300,
+		       'rad' : 50
+		};
 
-		/* Create game-loop with an update and a draw function
-		    with desired FPS*/
-		    
-		function update(){ ... };
-		function draw(){ ... };
+		// Canvas objects
+		var $c = $('#jonasCanvas');                      // jQuery canvas object
+		var c = document.getElementById("jonasCanvas");  // javascript canvas object
+		var ctx = c.getContext("2d");                    // draw object
 
-		var FPS = 30
+		// Functions
+		function update(){
+			arc1.x += 1
+			arc1.y += 1
+		};
+
+		function draw(){
+			/* 
+				The draw function is more static than the update funciton.
+				 Nothing should change here, and the variables that are used in the draw
+				  funciton should only be modified somewhere else.
+			*/
+
+			//ctx.clearRect(0,0,CANVAS_width, CANVAS_height)   // Clear entire canvas before every loop.
+			ctx.beginPath();
+			ctx.arc(arc1.x, arc1.y, arc1.rad, 0, 2*Math.PI);  // arc(x, y, rad_start, rad_end)
+			ctx.stroke();
+		
+		};
+
+		$c.attr('width', CANVAS_width);
+		$c.attr('height', CANVAS_height);
+		
+		// Game engine loop
 		setInterval(function(){
 			update();
 			draw();
 		}, 1000/FPS);
-	}
+	};
 
 	main()
+
+});
+		
 
 </script>
 
