@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title> Jonas test HTML </title>
+</head>
+<body>
+		<canvas id="jonasCanvas" width="800" height="640" style="border:1px solid #d3d3d3;">
+		Your browser does not support the HTML5 canvas tag.</canvas>
+
+</body>
+
+<script type="text/javascript">
+
+	/* Using reference: http://www.w3schools.com/tags/ref_canvas.asp */
+
+	/* Init canvas-object */
+	var c = document.getElementById("jonasCanvas");
+	var ctx = c.getContext("2d");
+	
+	/* Begins to define the path to be drawn */
+	ctx.beginPath();
+	ctx.arc(100,100,40,50,1.5*Math.PI);
+
+	ctx.stroke(); /* Actually draws the path that is defined so far */
+
+	ctx.moveTo(50,50); 
+	ctx.lineTo(500,500);
+
+	ctx.stroke();
+
+
+
+</script>
+
+</html>
