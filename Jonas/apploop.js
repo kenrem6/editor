@@ -1,19 +1,5 @@
-<!DOCTYPE html>
 
-<html>
-<head>
-	<title> Jonas test HTML </title>
-	<!-- jQuery api-->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-</head>
-<body>
-		<canvas id="jonasCanvas" style="border:1px solid #d3d3d3;">
-		Your browser does not support the HTML5 canvas tag.</canvas>
-
-</body>
-
-<script type="text/javascript">
-
+/* Javascript file. */
 
 $(document).ready(function(){
 	
@@ -31,7 +17,7 @@ $(document).ready(function(){
 		// 	Get the inner width and height from the window object. Docs @ http://www.w3schools.com/jsref/prop_win_innerheight.asp
 		var CANVAS_width = window.innerWidth - (window.innerWidth/10); 		
 		var CANVAS_height = window.innerHeight - (window.innerHeight/10);
-		var FPS = 30;
+		var FPS = 60.0;
 
 		// Variables
 		var currentKey;
@@ -51,7 +37,7 @@ $(document).ready(function(){
 		       rad : 50,
 		       start : 0,
 		       end : 2 * Math.PI,
-		       speed : 1,
+		       speed : 5,
 		       draw : function() {
 		       		ctx.arc(arc1.x, arc1.y, arc1.rad, arc1.start, arc1.end);
 		       }
@@ -65,16 +51,24 @@ $(document).ready(function(){
 		
 		function update(){
 
-			if (currentKey == 37){        
-				transformArc(arc1, -1, 0)	// left
-			} else if (currentKey == 38) {                  
-				transformArc(arc1, 0, -1)	// up
-			} else if (currentKey == 39) {                
-				transformArc(arc1, 1, 0)	// right
-			} else if (currentKey == 40) {
-				transformArc(arc1, 0, 1)	// down
-			} else if (currentKey == 32){   
-				arc1.speed += .1;			// space
+			switch(currentKey){
+				case 37:
+					transformArc(arc1, -1, 0)	// left
+					break;
+				case 38:
+					transformArc(arc1, 0, -1)	// up
+					break;
+				case 39:
+					transformArc(arc1, 1, 0)	// right
+					break;
+				case 40:
+					transformArc(arc1, 0, 1)	// down
+					break;
+				case 32:
+					arc1.speed += .1;			// space
+					break;
+				default:
+					break;
 			};
 		};
 
@@ -106,8 +100,3 @@ $(document).ready(function(){
 	main()
 
 });
-		
-
-</script>
-
-</html>

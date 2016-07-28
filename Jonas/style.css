@@ -1,0 +1,10 @@
+
+/* CSS-sheet */
+
+
+html, body { max-height: 100%; 
+			  max-width: 100%; }
+
+canvas {border:1px solid #d3d3d3;
+		 display: block; 
+	      margin: auto;}
